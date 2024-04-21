@@ -12,16 +12,12 @@ import os
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.urls import path
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
+from home.consumers import *
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 application = get_asgi_application()
 
 ws_pattern = [
-    path("ws/chat/<str:room_name>/", ChatConsumer.as_asgi()),
+    path("ws/test/", TestConsumer.as_asgi()),
 ]
-application = ProtocolTypeRouter(
-    {
-        # "http": application,
-        "websocket": URLRouter(ws_pattern)
-    }
-)
+application = ProtocolTypeRouter({"websocket": URLRouter(ws_pattern)})
