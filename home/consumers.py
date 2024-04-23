@@ -17,8 +17,10 @@ class TestConsumer(WebsocketConsumer):
         self.accept()
         self.send(text_data=json.dumps({"status": "connected"}))
 
-    def receive(self, text_data):
-        pass
+    def receive(self, text_data): # will accept data from front-end and print it
+        print(text_data)
+        self.send(text_data=json.dumps({"status": "received"}))
 
     def disconnect(self, close_code):
         self.close()
+        print("disconnected")
