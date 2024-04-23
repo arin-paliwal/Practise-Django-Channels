@@ -20,4 +20,9 @@ application = get_asgi_application()
 ws_pattern = [
     path("ws/test/", TestConsumer.as_asgi()),
 ]
-application = ProtocolTypeRouter({"websocket": URLRouter(ws_pattern)})
+application = ProtocolTypeRouter(
+    {
+        "http": application,
+        "websocket": URLRouter(ws_pattern),
+    }
+)
