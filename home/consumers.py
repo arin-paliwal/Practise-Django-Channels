@@ -27,8 +27,8 @@ class TestConsumer(WebsocketConsumer):
         print("disconnected")
 
     def send_notification(self, event):
-        print("Received notification")
-        print(event.get("value"))
-        self.send(text_data=({
+        # print("Received notification")
+        # print(event.get("value"))
+        self.send(text_data=json.dumps(({
             "value": event.get("value")
-        }))
+        })))
